@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Link from 'next/link'
+import Image from 'next/image'
+import Navigation from '#/navgation'
+import favicon from './favicon.ico'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,10 +20,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Link href="/sample" className="bg-blue-200 rounded px-4 py-2">
-          Sample
-        </Link>
-        {children}
+        <div className="mx-auto flex flex-col min-h-screen">
+          <header className="bg-gray-800 text-white p-4 ">
+            <div className="flex flex-auto gap-2">
+              <Image src={favicon} alt="방울뱀" width={32} />
+              <h1 className="text-2xl font-bold">방울뱀</h1>
+            </div>
+            <Navigation />
+          </header>
+          <main className="flex-grow bg-gray-100 p-4 text-sm">{children}</main>
+          <footer className="bg-gray-800 text-white p-4 flex gap-2 justify-center">
+            By <a href="https://github.com/acandiatale">acandiatale</a>
+            &#124;<a href="https://github.com/znuzu">znuzu</a>
+            &#124;<a href="https://github.com/leejy222">leejy222</a>
+          </footer>
+        </div>
       </body>
     </html>
   )
