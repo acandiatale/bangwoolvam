@@ -1,5 +1,5 @@
-type Board = {
+type Todo = {
   no: number
-  title: string
+  flag: boolean
   content: string
 }
