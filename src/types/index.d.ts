@@ -1,5 +1,9 @@
 type Todo = {
-  no: number
-  flag: boolean
+  id: string
   content: string
+  createDate: DateTime
+  flag: boolean
+  groupNo: number
+  registerDate: DateTime
+  sort: number
 }

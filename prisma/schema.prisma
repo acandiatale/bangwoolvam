@@ -1,20 +1,32 @@
-// prisma schema 추가&변경 시 아래 (1),(2),(3) 순차적으로 명령어 실행
-// (1) npx prisma migrate dev --create-only --preview-feature      // migrate commit
-// (2) npx prisma migrate deploy --preview-feature   // migrate push
-// (3) npx prisma generate   // generate *적용 
-// * 중도 취소시 npx prisma migrate reset 
+// schema 변경 시 npx prisma db pull & push 
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Todo {
-  no       Int    @id @default(autoincrement())
-  flag     Boolean @default(false)
-  content  String
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  content      String
+  createDate   DateTime @db.Date
+  flag         Boolean
+  groupNo      Int
+  registerDate DateTime @db.Date
+  sort         Int
+}
+
+model TodoGroup {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  sort  Int
+  title String
+}
+
+model User {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  /// Field referred in an index, but found no data to define the type.
+  email Json?  @unique
 }
